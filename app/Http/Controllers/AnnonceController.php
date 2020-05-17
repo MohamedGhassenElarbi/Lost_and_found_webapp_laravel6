@@ -7,6 +7,10 @@ use App\Annonce;
 class AnnonceController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         
         //$annonces=Annonce::all();
@@ -43,11 +47,13 @@ class AnnonceController extends Controller
        $annonce->title=request('title');
        $annonce->image=request('image');
        $annonce->typeAnnonce="lost";
+       $id = auth()->user()->id; 
+       $annonce->user_id=$id;
        $annonce->typeObjet=request('typeObjet');
        $annonce->localisation=request('localisation');
        $annonce->body=request('body');
        $annonce->save();
-       return redirect('/annoncel');
+       return redirect('/annoncel?type=lost');
     }
     public function edit($id){
         
@@ -76,6 +82,13 @@ class AnnonceController extends Controller
     public function destroy($id){
         $annonce=Annonce::find($id);
         $annonce->delete();
-        return redirect('/annoncel');
+        return redirect('/annoncel?type=lost');
     }
+
+    public function annoncescreated(){
+        $id = auth()->user()->id; 
+        $annonces=Annonce::where('user_id',$id)->get();
+        return view('annonces.showcreated',['annonces'=>$annonces]);
+    }
+
 }

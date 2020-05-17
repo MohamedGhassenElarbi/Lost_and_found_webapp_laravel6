@@ -67,21 +67,40 @@
 					<ul class="header-btns">
 
 					<!-- Account -->
+					@guest
 					<li class="header-account dropdown default-dropdown">
 							<div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
 								<div class="header-btns-icon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<strong class="text-uppercase">Mon Compte <i class="fa fa-caret-down"></i></strong>
+								<strong class="text-uppercase">Login <i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="#" class="text-uppercase">Logout</a>
+							
+						</li>
+					@else
+					<li class="header-account dropdown default-dropdown">
+							<div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+								<div class="header-btns-icon">
+									<a><i class="fa fa-user-o"></i>
+								</div>
+								<strong class="text-uppercase">{{ Auth::user()->name }} <i class="fa fa-caret-down"></i></strong>
+							</div>
+							<a class="text-uppercase" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
 							<ul class="custom-menu">
-								<li><a href="#"><i class="fa fa-user-o"></i> Modifier mes Données</a></li>
-								<li><a href="#"><i class="fa fa-heart-o"></i> Mes Annonces</a></li>
+								<li><a href="/user/edit"><i class="fa fa-user-o"></i> Modifier mes Données</a></li>
+								<li><a href="/annonces"><i class="fa fa-heart-o"></i> Mes Annonces</a></li>
 							</ul>
 						</li>
-						<!-- /Account -->
 						
+					@endguest
+					<!-- /Account -->
 
 						<!-- Mobile nav toggle-->
 						<li class="nav-toggle">
@@ -107,7 +126,7 @@
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="#">Déposer une annonce de type Lost</a></li>
+						<li><a href="/annonce/create">Déposer une annonce de type Lost</a></li>
 						<li><a href="#">Déposer une annonce de type Found</a></li>
                         <li><a href="/annoncel?type=lost">Consulter les annonces perdus</a></li>
                         <li><a href="/annoncel?type=found">Consulter les annonces trouvées</a></li>
