@@ -4,10 +4,19 @@
  <div class="section">
 		<!-- container -->
 		<div class="container">
+			
 			<!-- row -->
 			<div class="row">
-			<div class="header-search">
+					<div class="col-md-4 image_update">
+						<div id="product-main-view">
+							<div class="product-view">
+								<img src="/annonce_affichage/fetch_image/{{ $annonce->id }}" alt="something went wrong">
+							</div>
+							
+						</div>
+					
 					</div>
+			
 				<form id="checkout-form" class="clearfix" method="Post" action="/annonce/{{$annonce->id}}/update">
                 @csrf
                 @method('PUT')
@@ -40,6 +49,7 @@
 				</form>
 			</div>
 			<!-- /row -->
+			
 		</div>
 		<!-- /container -->
 	</div>

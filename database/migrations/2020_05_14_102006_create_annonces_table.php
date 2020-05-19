@@ -18,7 +18,7 @@ class CreateAnnoncesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('typeAnnonce');
-            $table->string('image');
+            $table->binary('image');
             $table->string('typeObjet');
             $table->string('localisation');
             $table->text('body');

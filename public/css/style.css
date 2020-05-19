@@ -1730,3 +1730,7 @@ textarea.input {
 .danger{
 color: red;
 }
+.image_update{
+  float:right;
+  margin-top:60px;
+}

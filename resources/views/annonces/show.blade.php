@@ -12,7 +12,7 @@
 					<div class="col-md-6">
 						<div id="product-main-view">
 							<div class="product-view">
-								<img src="{{$annonce->image}}" alt="something went wrong">
+								<img src="/annonce_affichage/fetch_image/{{ $annonce->id }}" alt="something went wrong">
 							</div>
 							
 						</div>

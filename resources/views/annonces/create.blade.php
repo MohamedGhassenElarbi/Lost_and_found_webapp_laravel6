@@ -8,7 +8,7 @@
 			<div class="row">
 			<div class="header-search">
 					</div>
-				<form id="checkout-form" class="clearfix" method="Post" action="/annonce/store">
+				<form id="checkout-form" class="clearfix" method="Post" action="{{ url('annonce/store') }}"enctype="multipart/form-data">
                 @csrf
 					<div class="col-md-6">
 						<div class="billing-details">
@@ -23,9 +23,14 @@
                                 <input class="input" type="text" name="typeObjet"id="typeObjet" placeholder="Type d'objet"value=>
                                 <p class="danger">{{$errors->first('typeObjet')}}</p>
 							</div>
-							<div class="form-group">
+							<!--<div class="form-group">
                                 <input class="input" type="text" name="image"id="image" placeholder="image"value=>
                                 <p class="danger">{{$errors->first('image')}}</p>
+							</div>-->
+							<div class="form-group">
+								<div class="custom-file">
+									<input type="file" name="image"id="image" class="custom-file-input">
+								</div>
 							</div>
 							<div class="form-group">
                                 <input class="input" type="text" name="localisation"id="localisation" placeholder="localisation"value=>
