@@ -56,9 +56,14 @@
 
 					<!-- Search -->
 					<div class="header-search">
-						<form method="Post" action="search.php">
-							<input class="input search-input" type="text" placeholder="Enter your keyword" name="recherche">
-							<button class="search-btn"><i class="fa fa-search"></i></button>
+						<form action="/search" method="get">
+							<input class="input search-input" type="text" placeholder="Chercher ici" name="search">
+							<select class="input search-categories" name="typeAnnonce">
+								<option value="lost">Recherche sur annonces de type Lost</option>
+								<option value="found">Recherche sur annonces de type Found</option>
+								
+							</select>
+							<button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
 						</form>
 					</div>
 					<!-- /Search -->
@@ -95,6 +100,7 @@
                                     </form>
 							<ul class="custom-menu">
 								<li><a href="/user/edit"><i class="fa fa-user-o"></i> Modifier mes Données</a></li>
+								<li><a href="/annonces"><i class="fas fa-lock"></i></i> Changer mot de passe</a></li>
 								<li><a href="/annonces"><i class="fa fa-heart-o"></i> Mes Annonces</a></li>
 							</ul>
 						</li>
@@ -126,10 +132,9 @@
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="/annonce/create">Déposer une annonce de type Lost</a></li>
-						<li><a href="#">Déposer une annonce de type Found</a></li>
-                        <li><a href="/annoncel?type=lost">Consulter les annonces perdus</a></li>
-                        <li><a href="/annoncel?type=found">Consulter les annonces trouvées</a></li>
+						<li><a href="/annonce/create">Déposer une annonce</a></li>
+                        <li><a href="/annoncel?type=lost">Consulter les annonces des objets perdus</a></li>
+                        <li><a href="/annoncel?type=found">Consulter les annonces des objets trouvées</a></li>
 
 
 

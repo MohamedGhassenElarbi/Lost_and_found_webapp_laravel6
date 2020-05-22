@@ -356,7 +356,7 @@ textarea.input {
 .header-search {
   display: inline-block;
   padding: 15px 0px;
-  max-width: 400px;
+  max-width: 700px;
 }
 
 .header-search>form {
@@ -364,6 +364,7 @@ textarea.input {
 }
 
 .header-search>form .search-input {
+  padding-left: 305px;
   padding-right: 45px;
 }
 
@@ -371,7 +372,7 @@ textarea.input {
   position: absolute;
   left: 0px;
   top: 0px;
-  width: 135px;
+  width: 286px;
 }
 
 .header-search>form .search-btn {

@@ -17,7 +17,7 @@
 					
 					</div>
 			
-				<form id="checkout-form" class="clearfix" method="Post" action="/annonce/{{$annonce->id}}/update">
+				<form id="checkout-form" class="clearfix" method="Post" action="/annonce/{{$annonce->id}}/update"enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 					<div class="col-md-6">
@@ -31,8 +31,13 @@
 							<div class="form-group">
                                 <input class="input" type="text" name="typeObjet"id="typeObjet" placeholder="Type d'objet"value="{{$annonce->typeObjet}}">
 							</div>
-							<div class="form-group">
+							<!--<div class="form-group">
                                 <input class="input" type="text" name="image"id="image" placeholder="image"value="{{$annonce->image}}">
+							</div>-->
+							<div class="form-group">
+								<div class="custom-file">
+									<input type="file" name="image"id="image" class="custom-file-input">
+								</div>
 							</div>
 							<div class="form-group">
                                 <input class="input" type="text" name="localisation"id="localisation" placeholder="localisation"value="{{$annonce->localisation}}">
