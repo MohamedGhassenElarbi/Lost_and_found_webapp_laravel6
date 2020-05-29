@@ -19,10 +19,19 @@
 								<input class="input" type="text" name="title"id="title" placeholder="Titre" value= >
                                 <p class="danger">{{$errors->first('title')}}</p>
 							</div>
-							<div class="form-group">
+							<!--<div class="form-group">
                                 <input class="input" type="text" name="typeObjet"id="typeObjet" placeholder="Type d'objet"value=>
                                 <p class="danger">{{$errors->first('typeObjet')}}</p>
+							</div>-->
+							<div style="margin-bottom: 15px">
+							<select class="input search-categories" name="typeObjet">
+								@foreach($typeObjets as $typeObjet)
+								<option value="{{$typeObjet->nomTypeObjet}}">{{$typeObjet-> nomTypeObjet}}</option>
+								
+								@endforeach
+							</select>
 							</div>
+
 							<!--<div class="form-group">
                                 <input class="input" type="text" name="image"id="image" placeholder="image"value=>
                                 <p class="danger">{{$errors->first('image')}}</p>

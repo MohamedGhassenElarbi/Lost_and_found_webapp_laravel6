@@ -40,9 +40,10 @@ Route::put('/user/{id}/update','UserController@update');
 Route::get('annonce_affichage/fetch_image/{id}', 'AnnonceController@fetch_image');
 //route de recherche d'une annonce
 Route::get('/search', 'AnnonceController@search');
-//route d'affichage des gouvernorats travers la methode index
-Route::get('/gouvernorat','GouvernoratController@index');
-
+//route d'affichage des neotifications
+Route::get('/notifications','AnnonceController@notifications');
+//route du suppression d'une neotification
+Route::get('/notifications/destroy{id}','AnnonceController@destroyNotifiation');
 
 
 

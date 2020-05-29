@@ -7,6 +7,11 @@ use App\Annonce;
 use Image;
 use Illuminate\Support\Facades\Response;
 use App\Gouvernorat;
+use App\TypeObjet;
+use App\Notifications\ReponseSurAnnonce;
+use Notification;
+use App\User;
+use Illuminate\Support\Collection;
 class AnnonceController extends Controller
 {
     
@@ -35,8 +40,9 @@ class AnnonceController extends Controller
     //cette fonction permet d'afficher une interface dans laquelle se fait l'ajout d'une annonce
     public function create(){
         $gouvernorats=Gouvernorat::all();
+        $typeObjets=TypeObjet::all();
         
-        return view('annonces.create',['gouvernorats'=>$gouvernorats]);
+        return view('annonces.create',['gouvernorats'=>$gouvernorats],['typeObjets'=>$typeObjets]);
     }
     //cette fonction sert a ajouter une annonce dans la base de donnés avec l'image sous forme d'un lien
     /*public function store(){
@@ -88,14 +94,19 @@ class AnnonceController extends Controller
             'user_id'=>$id,
             'typeAnnonce'=>$typeAnnonce
            );
-           Annonce::create($form_data);   
+           Annonce::create($form_data); 
+           self::verifierNotification($id,$request->title,$request->typeObjet,$request->localisation,$typeAnnonce,$request->body);
         return redirect('/annoncel?type=lost');
      }
      //cette fonction permet d'afficher l'interface dans laquelle se fait la mise a jour 
     public function edit($id){
         
         $annonce=Annonce::find($id);
-        return view('annonces.edit',['annonce'=>$annonce]);
+        $typeObjets=TypeObjet::all();
+        $gouvernorats=Gouvernorat::all();
+        //dd($gouvernorats);
+        //return view('annonces.edit',['annonce'=>$annonce],['typeObjets'=>$typeObjets],['gouvernorats'=>$gouvernorats]);
+        return view('annonces.edit', compact(['annonce', 'typeObjets','gouvernorats']));
     }
     //cette fonction permet de mettre a jour une annonce
     /*public function update($id){
@@ -184,6 +195,51 @@ class AnnonceController extends Controller
             ['typeAnnonce',$typeAnnonce ],
         ])->get();
         return view('annonces.index',['annonces'=>$annonces]);
+    }
+    //cette fonction permet d'assurer le mécanisme de notifications
+    function verifierNotification($id,$title,$typeObjet,$localisation,$typeAnnonce,$body){
+        $annonce=Annonce::where([
+            ['user_id', $id],
+            ['title',$title ],
+            ['typeObjet',$typeObjet ],
+            ['localisation',$localisation ],
+            ['typeAnnonce',$typeAnnonce ],
+            ['body',$body ],
+        ])->first();
+        $publisher=User::find($id);
+        $matchs=Annonce::where([
+            ['typeObjet',$typeObjet ],
+            ['localisation',$localisation ],
+            ['typeAnnonce', '!=' ,$typeAnnonce ],
+        ])->get();
+        if($matchs!=null){
+            $targets = collect([]);
+            foreach($matchs as $match){
+                $User=User::find($match->user_id);
+                $targets->push($User);
+                Notification::send($publisher,new ReponseSurAnnonce($match->id,$match->title,$match->typeObjet)); 
+
+                
+            }
+          // dd($publisher);
+            Notification::send($targets,new ReponseSurAnnonce($annonce->id,$title,$typeObjet)); 
+            
+        }
+        
+
+    }
+    //cette fonction permet d'afficher les notifications qui conçerne l'utilisateur connectée
+    public function notifications(){
+        $id = auth()->user()->id;
+        $notifications=\DB::table('notifications')->where('notifiable_id',$id)->get();
+        return view('annonces.aff_notifications',['notifications'=>$notifications]);
+    }
+
+    public function destroyNotifiation($notification){
+        //$notification=\DB::table('notifications')->where('id',$id)->first();
+        
+        $notification->delete();
+        return redirect('/notifications');
     }
 
 }

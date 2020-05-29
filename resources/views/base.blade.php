@@ -70,7 +70,43 @@
 				</div>
 				<div class="pull-right">
 					<ul class="header-btns">
-
+					<!-- Cart -->
+					<li class="header-cart dropdown default-dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+								<div class="header-btns-icon">
+									<i class="fa fa-bell"></i>
+									<span class="qty">{{count(auth()->user()->unreadNotifications)}}</span>
+								</div>
+							</a>
+							
+							<div class="custom-menu">
+								<div id="shopping-cart">
+									<div class="shopping-cart-list">
+									@if((count(auth()->user()->unreadNotifications))!=null)
+										@foreach(auth()->user()->unreadNotifications as $notification)
+										<div class="product product-widget">
+											<div class="product-thumb">
+												<img src="annonce_affichage/fetch_image/{{$notification->data['id']}}" alt="">
+											</div>
+											<div class="product-body">
+												<h3 class="product-name">{{$notification->data['typeObjet']}}</h3>
+												<h2 class="product-name"><a href="/annonce/{{$notification->data['id']}}">{{$notification->data['title']}}</a></h2>
+											</div>
+											<button class="cancel-btn">{{$notification->markAsRead()}}<i class="fa fa-eye"></i></button>
+										</div>
+										@endforeach
+									@else
+									<h5>Pas de notifications</h5>
+									@endif
+									</div>
+									<div class="shopping-cart-btns">
+										<a href="/notifications"><button class="main-btn"style="width: 100%;">Afficher tous</button></a>
+										
+									</div>
+								</div>
+							</div>
+						</li>
+					<!-- /Cart -->
 					<!-- Account -->
 					@guest
 					<li class="header-account dropdown default-dropdown">
@@ -107,7 +143,7 @@
 						
 					@endguest
 					<!-- /Account -->
-
+					
 						<!-- Mobile nav toggle-->
 						<li class="nav-toggle">
 							<button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
@@ -133,8 +169,8 @@
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="/annonce/create">Déposer une annonce</a></li>
-                        <li><a href="/annoncel?type=lost">Consulter les annonces des objets perdus</a></li>
-                        <li><a href="/annoncel?type=found">Consulter les annonces des objets trouvées</a></li>
+                        <li><a href="/annoncel?type=lost">Les annonces des objets perdus</a></li>
+                        <li><a href="/annoncel?type=found">Les annonces des objets trouvées</a></li>
 
 
 

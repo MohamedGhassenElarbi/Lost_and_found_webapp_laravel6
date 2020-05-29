@@ -28,8 +28,20 @@
 							<div class="form-group">
 								<input class="input" type="text" name="title"id="title" placeholder="Titre" value="{{$annonce->title}}" >
 							</div>
-							<div class="form-group">
+							<!--<div class="form-group">
                                 <input class="input" type="text" name="typeObjet"id="typeObjet" placeholder="Type d'objet"value="{{$annonce->typeObjet}}">
+							</div>-->
+							<div style="margin-bottom: 15px">
+							<select class="input search-categories" name="typeObjet" >
+								@foreach($typeObjets as $typeObjet)
+								<option value="{{$typeObjet->nomTypeObjet}}" 
+								@if(($typeObjet->nomTypeObjet)==$annonce->typeObjet)
+									selected
+								@endif
+								>{{$typeObjet-> nomTypeObjet}}</option>
+								
+								@endforeach
+							</select>
 							</div>
 							<!--<div class="form-group">
                                 <input class="input" type="text" name="image"id="image" placeholder="image"value="{{$annonce->image}}">
@@ -39,8 +51,20 @@
 									<input type="file" name="image"id="image" class="custom-file-input">
 								</div>
 							</div>
-							<div class="form-group">
+							<!--<div class="form-group">
                                 <input class="input" type="text" name="localisation"id="localisation" placeholder="localisation"value="{{$annonce->localisation}}">
+							</div>-->
+							<div style="margin-bottom: 15px">
+							<select class="input search-categories" name="localisation" >
+								@foreach($gouvernorats as $gouvernorat)
+								<option value="{{$gouvernorat->nomGouvernorat}}" 
+								@if($gouvernorat->nomGouvernorat==$annonce->localisation)
+									selected
+								@endif
+								>{{$gouvernorat->nomGouvernorat}}</option>
+								
+								@endforeach
+							</select>
 							</div>
 							<div class="form-group">
                                 <input class="input" type="text" name="body"id="body" placeholder="description"value="{{$annonce->body}}">

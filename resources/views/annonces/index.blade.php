@@ -27,7 +27,7 @@
 							<div class="product-label">
 							</div>
 							<button class="main-btn quick-view"><i class="fa fa-search-plus"></i><a href="/annonce/{{$annonce->id}}"> Quick view</a></button>
-							<img src="annonce_affichage/fetch_image/{{ $annonce->id }}" alt="erreur">
+							<img src="annonce_affichage/fetch_image/{{ $annonce->id }}" alt="erreur" width="200" height="250">
 						</div>
 						<div class="product-body">
 							<h3 class="product-price">{{$annonce->title}}</h3>
