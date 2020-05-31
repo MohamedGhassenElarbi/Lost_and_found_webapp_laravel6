@@ -26,11 +26,25 @@
 						
 							<p><i class="fa fa-map-marker"></i><strong> Localisation:</strong> {{$annonce->localisation}}</p>
 							<p>{{$annonce->body}}</p>
-							
-
-							<div class="product-btns">
-								<button class="primary-btn add-to-cart"><i class="fa fa-user"></i> Contacter</button>
+							<p><strong> Auteur de l'annonce:</strong>{{$user->name}}</p>
+							@if((auth()->user()->id)!=$user->id)
+							<strong>Envoyer un message:</strong>
+							<form id="checkout-form" class="clearfix" method="Post" action="{{ url('message/store') }}"enctype="multipart/form-data">
+							@csrf
+							<div class="form-group">
+                                <input class="input" type="text" name="message"id="message" placeholder="message"value=>
+                                <p class="danger"></p>
 							</div>
+							<input type="hidden" id="receiver_id" name="receiver_id" value="{{$user->id}}">
+							<div class="form-group">
+							<button type="submit" class="primary-btn"><i class="fa fa-envelope"></i> Envoyer</button>
+							</div>
+							</form>
+							<div class="product-btns">
+								
+								<button class="primary-btn add-to-cart"><i class="fa fa-user"></i> Consulter son Profil</button>
+							</div>
+							@endif
 						</div>
 					</div>
 					

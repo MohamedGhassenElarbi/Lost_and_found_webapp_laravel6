@@ -44,6 +44,11 @@ Route::get('/search', 'AnnonceController@search');
 Route::get('/notifications','AnnonceController@notifications');
 //route du suppression d'une neotification
 Route::get('/notifications/destroy{id}','AnnonceController@destroyNotifiation');
+//route pour envoyer un message
+Route::post('/message/store','MessageController@store');
+//route d'affichage des messages du user connectée
+Route::get('/messages','MessageController@index');
+//Route::get('/','MessageController@show');
 
 
 

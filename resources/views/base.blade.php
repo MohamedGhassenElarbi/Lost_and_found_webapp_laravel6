@@ -70,20 +70,21 @@
 				</div>
 				<div class="pull-right">
 					<ul class="header-btns">
+					
 					<!-- Cart -->
 					<li class="header-cart dropdown default-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<div class="header-btns-icon">
 									<i class="fa fa-bell"></i>
-									<span class="qty">{{count(auth()->user()->unreadNotifications)}}</span>
+									<span class="qty">{{count(auth()->user()->unreadNotifications->where('type', 'App\Notifications\ReponseSurAnnonce'))}}</span>
 								</div>
 							</a>
 							
 							<div class="custom-menu">
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
-									@if((count(auth()->user()->unreadNotifications))!=null)
-										@foreach(auth()->user()->unreadNotifications as $notification)
+									@if((count(auth()->user()->unreadNotifications->where('type', 'App\Notifications\ReponseSurAnnonce')))!=null)
+										@foreach(auth()->user()->unreadNotifications->where('type', 'App\Notifications\ReponseSurAnnonce') as $notification)
 										<div class="product product-widget">
 											<div class="product-thumb">
 												<img src="annonce_affichage/fetch_image/{{$notification->data['id']}}" alt="">
@@ -107,6 +108,43 @@
 							</div>
 						</li>
 					<!-- /Cart -->
+					<!-- messages -->
+					<li class="header-cart dropdown default-dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+								<div class="header-btns-icon">
+									<i class="fa fa-envelope"></i>
+									<span class="qty">{{count(auth()->user()->unreadNotifications->where('type', 'App\Notifications\MessageNotification'))}}</span>
+								</div>
+							</a>
+							
+							<div class="custom-menu">
+								<div id="shopping-cart">
+									<div class="shopping-cart-list">
+									@if((count(auth()->user()->unreadNotifications->where('type', 'App\Notifications\MessageNotification')))!=null)
+										@foreach(auth()->user()->unreadNotifications->where('type', 'App\Notifications\MessageNotification') as $notification)
+										<div class="product product-widget">
+											<div class="product-thumb">
+												<img src="/img/avatar.jpg" alt="">
+											</div>
+											<div class="product-body">
+												<h3 class="product-name">{{$notification->data['name']}}</h3>
+												<h2 class="product-name"><a href="">{{$notification->data['message']}}</a></h2>
+											</div>
+											<button class="cancel-btn"><i class="fa fa-eye"></i></button>
+										</div>
+										@endforeach
+									@else
+									<h5>Pas de Messages</h5>
+									@endif
+									</div>
+									<div class="shopping-cart-btns">
+										<a href="/messages"><button class="main-btn"style="width: 100%;">Afficher tous</button></a>
+										
+									</div>
+								</div>
+							</div>
+						</li>
+					<!-- /messages -->
 					<!-- Account -->
 					@guest
 					<li class="header-account dropdown default-dropdown">

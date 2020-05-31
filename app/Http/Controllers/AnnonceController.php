@@ -35,7 +35,8 @@ class AnnonceController extends Controller
     public function show($id){
 
         $annonce=Annonce::find($id);
-        return view('annonces.show',['annonce'=>$annonce]);
+        $user=User::find($annonce->user_id);
+        return view('annonces.show',['annonce'=>$annonce],['user'=>$user]);
     }
     //cette fonction permet d'afficher une interface dans laquelle se fait l'ajout d'une annonce
     public function create(){
