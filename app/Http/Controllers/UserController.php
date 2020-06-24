@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     //
@@ -30,6 +31,34 @@ class UserController extends Controller
         
         $user->save();
         return redirect('/user/edit');
+    }
+    public function affVerifMotDePasse(){
+        return view('user.verifMotDePasse');
+    }
+    public function verifMotDePasse(){
+        request()->validate([
+            'mdp'=>'required'
+            
+         ]);
+        $entered_password=request('mdp');
+        $id = auth()->user()->id; 
+        $user=User::find($id);
+        if (Hash::check($entered_password, $user->password)) {
+            return view('user.editMotDePasse');   
+        }
+        return view('user.verifMotDePasse');
+    }
+    public function updateMotDePasse(){
+        request()->validate([
+            'mdp'=>'required'
+            
+         ]);
+        $entered_password=request('mdp');
+        $id = auth()->user()->id; 
+        $user=User::find($id);
+        $user->password=Hash::make($entered_password);
+        $user->save();
+        return redirect('/annoncel?type=lost');//password=ghassen1
     }
 
 }

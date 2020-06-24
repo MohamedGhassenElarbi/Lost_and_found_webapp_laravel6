@@ -44,11 +44,22 @@ Route::get('/search', 'AnnonceController@search');
 Route::get('/notifications','AnnonceController@notifications');
 //route du suppression d'une neotification
 Route::get('/notifications/destroy{id}','AnnonceController@destroyNotifiation');
-//route pour envoyer un message
+//route pour envoyer un message d'aprés la page d'une annonce
 Route::post('/message/store','MessageController@store');
 //route d'affichage des messages du user connectée
 Route::get('/messages','MessageController@index');
-//Route::get('/','MessageController@show');
+//route d'affichage la discussion avec un user
+Route::get('/messages/{id}','MessageController@show');
+//route pour envoyer un message dans la discussion
+Route::post('/message/storeDescussion','MessageController@storeDiscussion');
+//route qui permet d'effacer un message a travers la methode destroy
+Route::get('/message/destroy/{id}','MessageController@destroy');
+//route d'affichage de l'interface d'affichage du formulaire de vérification du mot de passe par la méthode affVerifMotDePasse
+Route::get('/user/affVerifMotDePasse','UserController@affVerifMotDePasse');
+//route de vérification du mot de passe par la méthode verifMotDePasse
+Route::get('/user/verifMotDePasse','UserController@verifMotDePasse');
+//route de mise a jour du mot de passe d'un utilisateur a travers la methode updateMotDePasse
+Route::put('/user/updateMotDePasse','UserController@updateMotDePasse');
 
 
 

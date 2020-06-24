@@ -10,7 +10,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 class MessageNotification extends Notification
 {
     use Queueable;
-    public $id;
+    public $identifiant;
     public $name;
     public $message;
     /**
@@ -18,10 +18,10 @@ class MessageNotification extends Notification
      *
      * @return void
      */
-    public function __construct($message,$name,$id)
+    public function __construct($message,$name,$identifiant)
     {
         //
-        $this->id=$id;
+        $this->identifiant=$identifiant;
         $this->name=$name;
         $this->message=$message;
     }
@@ -47,7 +47,7 @@ class MessageNotification extends Notification
     {
         return [
             //
-            'id'=>$this->id,
+            'identifiant'=>$this->identifiant,
             'name'=>$this->name,
             'message'=>$this->message
         ];

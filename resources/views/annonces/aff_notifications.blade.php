@@ -16,18 +16,24 @@
 									</tr>
 								</thead>
 								<tbody>
-                                @foreach(auth()->user()->notifications as $notification)
+                                @foreach(auth()->user()->notifications->where('type', 'App\Notifications\ReponseSurAnnonce') as $notification)
 									<tr>
-										<td class="thumb"><img src="annonce_affichage/fetch_image/{{ $notification->data['id'] }}" alt="" ></td>
+									<td class="thumb"><img src="annonce_affichage/fetch_image/{{ $notification->data['identifiant'] }}" alt="" ></td>
                                         <td class="price text-center"><strong>{{$notification->data['typeObjet']}}</strong><br><!--<del class="font-weak"><small>sous type</small></del>--></td>
-                                        <td class="total text-center"><strong class="primary-color">{{$notification->data['title']}}</strong></td>
+                                        <td class="total text-center"><strong class="primary-color">{{$notification->data['title'] }}</strong></td>
 										
 										
-										<td class="text-right">
-                                            <a href="/annonce/{{$notification->data['id']}}">
+										<td class="text-center">
+                                            <a href="/annonce/{{$notification->data['identifiant'] }}">
                                                 <button type="button" class="btn btn-primary">plus de détails</button>
                                             </a>
-											<a href="{{$notification->destroy()}}">
+											<a href="{{$notification->markAsRead()}}">
+                                                <button type="button" class="btn btn-success"><i class="fa fa-eye"></i> Marquer lu</button>
+                                            </a>
+											<a href="{{$notification->markAsUnRead()}}">
+                                                <button type="button" class="btn btn-warning"><i class="fa fa-eye-slash"></i> Marquer non lu</button>
+                                            </a>
+											<a href="{{$notification->delete()}}">
 												<button type="button" class="btn btn-danger">Supprimer</button>
                                             </a>
                                         </td>

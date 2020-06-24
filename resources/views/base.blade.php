@@ -49,7 +49,7 @@
 					<!-- Logo -->
 					<div class="header-logo">
 						<a class="logo" href="index.php">
-							<img src="/img/logo.png" alt="">
+							<img src="/img/logo_farkess.png" alt="" height="150px">
 						</a>
 					</div>
 					<!-- /Logo -->
@@ -87,11 +87,11 @@
 										@foreach(auth()->user()->unreadNotifications->where('type', 'App\Notifications\ReponseSurAnnonce') as $notification)
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="annonce_affichage/fetch_image/{{$notification->data['id']}}" alt="">
+												<img src="annonce_affichage/fetch_image/{{$notification->data['identifiant']}}" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-name">{{$notification->data['typeObjet']}}</h3>
-												<h2 class="product-name"><a href="/annonce/{{$notification->data['id']}}">{{$notification->data['title']}}</a></h2>
+												<h2 class="product-name"><a href="/annonce/{{$notification->data['identifiant']}}">{{$notification->data['title']}}</a></h2>
 											</div>
 											<button class="cancel-btn">{{$notification->markAsRead()}}<i class="fa fa-eye"></i></button>
 										</div>
@@ -130,7 +130,7 @@
 												<h3 class="product-name">{{$notification->data['name']}}</h3>
 												<h2 class="product-name"><a href="">{{$notification->data['message']}}</a></h2>
 											</div>
-											<button class="cancel-btn"><i class="fa fa-eye"></i></button>
+											<button class="cancel-btn">{{$notification->markAsRead()}}<i class="fa fa-eye"></i></button>
 										</div>
 										@endforeach
 									@else
@@ -174,8 +174,8 @@
                                     </form>
 							<ul class="custom-menu">
 								<li><a href="/user/edit"><i class="fa fa-user-o"></i> Modifier mes Données</a></li>
-								<li><a href="/annonces"><i class="fas fa-lock"></i></i> Changer mot de passe</a></li>
-								<li><a href="/annonces"><i class="fa fa-heart-o"></i> Mes Annonces</a></li>
+								<li><a href="/user/affVerifMotDePasse"><i class="fa fa-lock"></i></i> Changer mot de passe</a></li>
+								<li><a href="/annonces"><i class="fa fa-file"></i> Mes Annonces</a></li>
 							</ul>
 						</li>
 						
@@ -324,12 +324,12 @@
 	
 
 	<!-- jQuery Plugins -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/slick.min.js"></script>
-	<script src="js/nouislider.min.js"></script>
-	<script src="js/jquery.zoom.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/slick.min.js"></script>
+	<script src="../js/nouislider.min.js"></script>
+	<script src="../js/jquery.zoom.min.js"></script>
+	<script src="../js/main.js"></script>
 
 </body>
 

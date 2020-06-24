@@ -12,17 +12,21 @@
         <tbody>
           @foreach($messages as $message)
             <tr> 
+                
                 <th><img src="/img/avatar2.jpg" width="50px"></img></th>
-                <th>{{$message->sender_id}}</th>
+                <th>{{$message->name}}</th>
                 <th>{{$message->message}}</th>
                 <th>
-                    <a href="#">
-                        <button type="button" class="btn btn-primary">plus de détails</button>
+                    <a href="/messages/{{$message->sender_id}}">
+                        <button type="button" class="btn btn-primary">Accéder au conversation</button>
                     </a>
-                    <a href="#">
+                    
+                    <a href="/message/destroy/{{$message->id}}">
                         <button type="button" class="btn btn-danger">Supprimer</button>
                     </a>
+                    
                 </th>
+                
             </tr>
             @endforeach
         </tbody>

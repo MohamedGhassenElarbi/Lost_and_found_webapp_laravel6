@@ -11,7 +11,7 @@ class ReponseSurAnnonce extends Notification
 {
     use Queueable;
 
-    public $id;
+    public $identifiant;
     public $title;
     public $typeObjet;
     /**
@@ -19,10 +19,10 @@ class ReponseSurAnnonce extends Notification
      *
      * @return void
      */
-    public function __construct($id,$title,$typeObjet)
+    public function __construct($identifiant,$title,$typeObjet)
     {
         //
-        $this->id=$id;
+        $this->identifiant=$identifiant;
         $this->title=$title;
         $this->typeObjet=$typeObjet;
     }
@@ -67,7 +67,7 @@ class ReponseSurAnnonce extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id'=>$this->id,
+            'identifiant'=>$this->identifiant,
             'title'=>$this->title,
             'typeObjet'=>$this->typeObjet
         ];

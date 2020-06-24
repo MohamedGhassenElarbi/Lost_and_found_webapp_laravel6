@@ -29,7 +29,9 @@ class AnnonceController extends Controller
         }else{
             $annonces=Annonce::where('typeAnnonce','found')->get();
         }
-        return view('annonces.index',['annonces'=>$annonces]);
+        $annonces_triee=self::triAnnoncesParProximite($annonces);
+        return view('annonces.index',['annonces'=>$annonces_triee]);
+       //return response()->json($annonces);
     }
     //cette fonction permet d'afficher les données d'une annonce selon son identidiant($id)
     public function show($id){
@@ -134,7 +136,7 @@ class AnnonceController extends Controller
         $request->validate([
             'title'  => 'required',
             'typeObjet'=>'required',
-            'image' => 'required|image|max:2048',
+            
             'localisation'=>'required',
             'body'=>'required'
         ]);
@@ -150,14 +152,7 @@ class AnnonceController extends Controller
             $image = Image::make($request->file('image')->getRealPath());
             Response::make($image->encode('jpg'));
             $annonce->image=$image;
-        }else{
-            /*$image_file = Image::make($annonce->image);
-            $var = Response::make($image_file->encode('jpg'));
-            $image = Image::make($var);
-            Response::make($image->encode('jpg'));
-            $annonce->image=$image; */
         }
-        
         $annonce->typeAnnonce=$typeAnnonce;
         $annonce->typeObjet=request('typeObjet');
         $annonce->localisation=request('localisation');
@@ -169,7 +164,7 @@ class AnnonceController extends Controller
     public function destroy($id){
         $annonce=Annonce::find($id);
         $annonce->delete();
-        return redirect('/annoncel?type=lost');
+        return redirect('/annonces');
     }
     //cette fonction permet d'afficher les annonces créer par l'utilisateur connectée
     public function annoncescreated(){
@@ -232,8 +227,11 @@ class AnnonceController extends Controller
     //cette fonction permet d'afficher les notifications qui conçerne l'utilisateur connectée
     public function notifications(){
         $id = auth()->user()->id;
-        $notifications=\DB::table('notifications')->where('notifiable_id',$id)->get();
+        $notifications=\DB::table('notifications')->where('notifiable_id',$id)
+        ->where('type', 'App\Notifications\ReponseSurAnnonce')->get();
+        //dd($notifications);
         return view('annonces.aff_notifications',['notifications'=>$notifications]);
+        
     }
 
     public function destroyNotifiation($notification){
@@ -241,6 +239,23 @@ class AnnonceController extends Controller
         
         $notification->delete();
         return redirect('/notifications');
+    }
+
+
+    public function triAnnoncesParProximite($annonces){
+        $ordered = collect([]);
+        $location = auth()->user()->adress;
+        foreach($annonces as $annonce){
+            if($annonce->localisation==$location){$ordered->prepend($annonce);}
+            else{$ordered->push($annonce);}
+        }
+           // $collection = collect(['Sousse', 'Monastir', 'Mahdia','Ariana','Kef']);
+           // $ordered->merge($others);
+           // dd($ordered,$others);
+           /* $ordered = $annonces->sortBy(function ($product, $key) {
+                return ($product['localisation']);
+            },$collection);*/
+        return $ordered;
     }
 
 }

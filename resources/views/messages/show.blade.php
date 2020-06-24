@@ -1,11 +1,8 @@
 
-<html>
-<head>
+@extends('base')
+@section('content')
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<head>
 <link type="text/css" rel="stylesheet" href="/css/chat.css" />
 </head>
 <body>
@@ -14,24 +11,13 @@
 <div class="messaging">
       <div class="inbox_msg">
         <div class="inbox_people">
-          <div class="headind_srch">
-            <div class="recent_heading">
-              <h4>Recent</h4>
-            </div>
-            <div class="srch_bar">
-              <div class="stylish-input-group">
-                <input type="text" class="search-bar"  placeholder="Search" >
-                <span class="input-group-addon">
-                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                </span> </div>
-            </div>
-          </div>
+          
           <div class="inbox_chat">
             <div class="chat_list active_chat">
               <div class="chat_people">
                 <div class="chat_img"> <img src="/img/avatar2.jpg" alt="sunil"> </div>
                 <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                  <h5>{{$partner->name}}</h5>
                 </div>
               </div>
             </div>
@@ -60,15 +46,20 @@
             @endif
             @endforeach
           </div>
+          <form method="Post" action="{{ url('/message/storeDescussion') }}">
+          @csrf
           <div class="type_msg">
             <div class="input_msg_write">
-              <input type="text" class="write_msg" placeholder="Type a message" />
-              <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+              <input type="text" class="write_msg" placeholder="Type a message"name="message"id="message" />
+              <input type="hidden" id="receiver_id" name="receiver_id" value="{{$partner->id}}">
+              <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
             </div>
           </div>
+          </form>
         </div>
       </div>
       
     
     </body>
-    </html>
+    
+    @endsection
