@@ -17,7 +17,7 @@
 								<h3 class="title">Saisir votre ancient Mot de Passe </h3>
                             </div>
 							<div class="form-group">
-								<input class="input" type="text" name="mdp"id="mdp" placeholder="Mot de passe" value="" >
+								<input class="input" type="password" name="mdp"id="mdp" placeholder="Mot de passe" value="" >
 							</div>
 							<div class="form-group">
 							<button type="submit" class="primary-btn">Vérifier votre mot de passe</button>

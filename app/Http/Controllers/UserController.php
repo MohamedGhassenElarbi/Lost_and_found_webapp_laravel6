@@ -58,7 +58,12 @@ class UserController extends Controller
         $user=User::find($id);
         $user->password=Hash::make($entered_password);
         $user->save();
-        return redirect('/annoncel?type=lost');//password=ghassen1
+        return redirect('/annoncel?type=lost');//password=ghassen0
+    }
+
+    public function show($id){
+        $user=User::find($id);
+        return view('user.show',['user'=>$user]);
     }
 
 }

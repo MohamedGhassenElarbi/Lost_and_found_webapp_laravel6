@@ -93,7 +93,7 @@
 												<h3 class="product-name">{{$notification->data['typeObjet']}}</h3>
 												<h2 class="product-name"><a href="/annonce/{{$notification->data['identifiant']}}">{{$notification->data['title']}}</a></h2>
 											</div>
-											<button class="cancel-btn">{{$notification->markAsRead()}}<i class="fa fa-eye"></i></button>
+											<a href="/notifications/MarkAsRead{{$notification->id}}"><button class="cancel-btn"><i class="fa fa-eye"></i></button></a>
 										</div>
 										@endforeach
 									@else
@@ -130,7 +130,7 @@
 												<h3 class="product-name">{{$notification->data['name']}}</h3>
 												<h2 class="product-name"><a href="">{{$notification->data['message']}}</a></h2>
 											</div>
-											<button class="cancel-btn">{{$notification->markAsRead()}}<i class="fa fa-eye"></i></button>
+											<a href="/message/MarkAsRead{{$notification->id}}"><button class="cancel-btn"><i class="fa fa-eye"></i></button></a>
 										</div>
 										@endforeach
 									@else
@@ -236,12 +236,12 @@
 						<!-- footer logo -->
 						<div class="footer-logo">
 							<a class="logo" href="#">
-		            <img src="./img/logo.png" alt="">
+		            <img src="/img/logo_farkess.png" alt="">
 		          </a>
 						</div>
 						<!-- /footer logo -->
 
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+						<p>Notre application permet de faciliter le processus de trouver les objets perdus en mettant en relation les personnes impliquées.</p>
 
 						<!-- footer social -->
 						<ul class="footer-social">
@@ -259,12 +259,10 @@
 				<!-- footer widget -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">My Account</h3>
+						<h3 class="footer-header">Mon Compte</h3>
 						<ul class="list-links">
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">My Wishlist</a></li>
-							<li><a href="#">Compare</a></li>
-							<li><a href="#">Checkout</a></li>
+							<li><a href="#">Modifier Mes Données</a></li>
+							<li><a href="#">Mes Annonces</a></li>
 							<li><a href="#">Login</a></li>
 						</ul>
 					</div>
@@ -276,11 +274,11 @@
 				<!-- footer widget -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">Customer Service</h3>
+						<h3 class="footer-header">Farkess</h3>
 						<ul class="list-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Shiping & Return</a></li>
-							<li><a href="#">Shiping Guide</a></li>
+							<li><a href="#">À propos</a></li>
+							<li><a href="#">Contacter</a></li>
+							<li><a href="#">Reporter un problème</a></li>
 							<li><a href="#">FAQ</a></li>
 						</ul>
 					</div>
@@ -290,13 +288,13 @@
 				<!-- footer subscribe -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">Stay Connected</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+						<h3 class="footer-header">rester connecté</h3>
+						<p>veuillez laisser votre email pour recevoir toutes nos nouveautés.</p>
 						<form>
 							<div class="form-group">
-								<input class="input" placeholder="Enter Email Address">
+								<input class="input" placeholder="Addresse Email">
 							</div>
-							<button class="primary-btn">Join Newslatter</button>
+							<button class="primary-btn">Envoyer Email</button>
 						</form>
 					</div>
 				</div>

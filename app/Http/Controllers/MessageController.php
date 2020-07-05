@@ -75,4 +75,12 @@ class MessageController extends Controller
         $message->delete();
         return redirect('/messages');
     }
+
+    //cette fonction permet de marquer une notification comme lu
+    public function MarkAsReadNotifiation($id){
+        $notification = auth()->user()->notifications()->where('id', $id)->first();
+        if($notification){$notification->markAsRead();
+        }
+        return redirect('/annoncel?type=lost');
+    }
 }

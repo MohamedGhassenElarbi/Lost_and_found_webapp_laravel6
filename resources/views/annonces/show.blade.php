@@ -42,7 +42,7 @@
 							</form>
 							<div class="product-btns">
 								
-								<button class="primary-btn add-to-cart"><i class="fa fa-user"></i> Consulter son Profil</button>
+								<a href="/user/show/{{$user->id}}"><button class="primary-btn add-to-cart"><i class="fa fa-user"></i> Consulter son Profil</button></a>
 							</div>
 							@endif
 						</div>

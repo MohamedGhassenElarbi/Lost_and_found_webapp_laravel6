@@ -27,13 +27,13 @@
                                             <a href="/annonce/{{$notification->data['identifiant'] }}">
                                                 <button type="button" class="btn btn-primary">plus de détails</button>
                                             </a>
-											<a href="{{$notification->markAsRead()}}">
+											<a href="/notifications/MarkAsRead{{$notification->id}}">
                                                 <button type="button" class="btn btn-success"><i class="fa fa-eye"></i> Marquer lu</button>
                                             </a>
-											<a href="{{$notification->markAsUnRead()}}">
+											<a href="/notifications/MarkAsUnread{{$notification->id}}">
                                                 <button type="button" class="btn btn-warning"><i class="fa fa-eye-slash"></i> Marquer non lu</button>
                                             </a>
-											<a href="{{$notification->delete()}}">
+											<a href="/notifications/destroy{{$notification->id}}">
 												<button type="button" class="btn btn-danger">Supprimer</button>
                                             </a>
                                         </td>

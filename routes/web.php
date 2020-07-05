@@ -40,10 +40,14 @@ Route::put('/user/{id}/update','UserController@update');
 Route::get('annonce_affichage/fetch_image/{id}', 'AnnonceController@fetch_image');
 //route de recherche d'une annonce
 Route::get('/search', 'AnnonceController@search');
-//route d'affichage des neotifications
+//route d'affichage des notifications
 Route::get('/notifications','AnnonceController@notifications');
-//route du suppression d'une neotification
+//route du suppression d'une notification
 Route::get('/notifications/destroy{id}','AnnonceController@destroyNotifiation');
+//route du marquage d'une notification comme lu
+Route::get('/notifications/MarkAsRead{id}','AnnonceController@MarkAsReadNotifiation');
+//route du marquage d'une notification comme non lu
+Route::get('/notifications/MarkAsUnread{id}','AnnonceController@MarkAsUnreadNotifiation');
 //route pour envoyer un message d'aprés la page d'une annonce
 Route::post('/message/store','MessageController@store');
 //route d'affichage des messages du user connectée
@@ -54,13 +58,16 @@ Route::get('/messages/{id}','MessageController@show');
 Route::post('/message/storeDescussion','MessageController@storeDiscussion');
 //route qui permet d'effacer un message a travers la methode destroy
 Route::get('/message/destroy/{id}','MessageController@destroy');
+//route du marquage d'une notification de message comme lu
+Route::get('/message/MarkAsRead{id}','MessageController@MarkAsReadNotifiation');
 //route d'affichage de l'interface d'affichage du formulaire de vérification du mot de passe par la méthode affVerifMotDePasse
 Route::get('/user/affVerifMotDePasse','UserController@affVerifMotDePasse');
 //route de vérification du mot de passe par la méthode verifMotDePasse
 Route::get('/user/verifMotDePasse','UserController@verifMotDePasse');
 //route de mise a jour du mot de passe d'un utilisateur a travers la methode updateMotDePasse
 Route::put('/user/updateMotDePasse','UserController@updateMotDePasse');
-
+//affichage des données d'un user
+Route::get('/user/show/{id}','UserController@show');
 
 
 

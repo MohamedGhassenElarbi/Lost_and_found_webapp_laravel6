@@ -18,7 +18,7 @@
                                 <h4 class="title">Saisir le nouveau Mot de passe </h4>
                             </div>
 							<div class="form-group">
-								<input class="input" type="text" name="mdp"id="mdp" placeholder="Mot de passe" value="" >
+								<input class="input" type="password" name="mdp"id="mdp" placeholder="Mot de passe" value="" >
 							</div>
 							<div class="form-group">
 							<button type="submit" class="primary-btn">Confirmer</button>

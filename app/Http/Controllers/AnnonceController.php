@@ -31,7 +31,7 @@ class AnnonceController extends Controller
         }
         $annonces_triee=self::triAnnoncesParProximite($annonces);
         return view('annonces.index',['annonces'=>$annonces_triee]);
-       //return response()->json($annonces);
+        //return response()->json($annonces_triee);
     }
     //cette fonction permet d'afficher les données d'une annonce selon son identidiant($id)
     public function show($id){
@@ -233,15 +233,31 @@ class AnnonceController extends Controller
         return view('annonces.aff_notifications',['notifications'=>$notifications]);
         
     }
-
-    public function destroyNotifiation($notification){
-        //$notification=\DB::table('notifications')->where('id',$id)->first();
-        
-        $notification->delete();
+    //cette fonction permet de supprimer une notification
+    public function destroyNotifiation($id){
+        $notification = auth()->user()->notifications()->where('id', $id)->first();
+        if($notification){$notification->delete();
+        }
         return redirect('/notifications');
     }
 
+    //cette fonction permet de marquer une notification comme lu
+    public function MarkAsReadNotifiation($id){
+        $notification = auth()->user()->notifications()->where('id', $id)->first();
+        if($notification){$notification->markAsRead();
+        }
+        return redirect('/notifications');
+    }
 
+    //cette fonction permet de marquer une notification comme non lu
+    public function MarkAsUnreadNotifiation($id){
+        $notification = auth()->user()->notifications()->where('id', $id)->first();
+        if($notification){$notification->markAsUnread();
+        }
+        return redirect('/notifications');
+    }
+
+    //tri des annonces selon la localisation de l'utilisateur connecté
     public function triAnnoncesParProximite($annonces){
         $ordered = collect([]);
         $location = auth()->user()->adress;
@@ -249,12 +265,6 @@ class AnnonceController extends Controller
             if($annonce->localisation==$location){$ordered->prepend($annonce);}
             else{$ordered->push($annonce);}
         }
-           // $collection = collect(['Sousse', 'Monastir', 'Mahdia','Ariana','Kef']);
-           // $ordered->merge($others);
-           // dd($ordered,$others);
-           /* $ordered = $annonces->sortBy(function ($product, $key) {
-                return ($product['localisation']);
-            },$collection);*/
         return $ordered;
     }
 
